@@ -1,24 +1,56 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../../public/Logo.png'
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Navbar = () => {
 
+  const {user,logOut} = useContext(AuthContext);
+  const [theme, setTheme] = useState(() => {
+
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.querySelector('html').setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const handleToggle = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'night' : 'light'));
+  };
+
+
+
     const links = (
-        <div className="lg:flex font-semibold rounded-xl text-[16px]">
+        <div className="lg:flex font-semibold rounded-xl text-[20px]">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/ee">All Art & Craft</NavLink>
+            <NavLink to="/ee">All Jobs</NavLink>
           </li>
           <li>
-            <NavLink to="/ee">Add Craft Item</NavLink>
+            <NavLink to="/ee">Add A Job</NavLink>
           </li>
           <li>
-            <NavLink to="/t">My Art & Craft List</NavLink>
+            <NavLink to="/t">My Jobs</NavLink>
           </li>
           <li>
-            <NavLink to="/t">Register</NavLink>
+            <NavLink to="/register">Register</NavLink>
+          </li>
+          <li>
+            <NavLink to="/t">Blogs</NavLink>
           </li>
         </div>
       );
@@ -53,24 +85,66 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className='flex items-center'>
-           <div className='w-20'>
+        <div className='flex items-center gap-3'>
+           <div className='w-16 lg:w-20'>
            <img src={logo} alt="" />
            </div>
-            <a className="btn btn-ghost text-4xl">JobQuestHub</a>
+            <a className="text-lg lg:text-4xl font-extrabold text-cyan-600">JobQuestHub</a>
         </div>
 
 
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-[18px] font-semibold">
           {links}
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
-      </div>
+
+      <div className="navbar-end gap-4">
+        
+       <div>
+       <input
+          onChange={handleToggle}
+          type="checkbox"
+          value="synthwave"
+          className="toggle ml-7 mt-4 lg:mt-2  theme-controller"
+          checked={theme === 'night'}
+        />
+       </div>
+
+
+
+      
+
+
+
+      {user ? (
+          <>
+            <span className="hidden lg:inline-block">{user.email}</span>
+            {user.photoUrl ? (
+              <img
+                src={user.photoUrl}
+                alt="User"
+                className="h-8 w-8 rounded-full"
+              />
+            ) : (
+              <span className="hidden lg:inline-block">No photo</span> 
+            )}
+            <button onClick={ handleLogOut } className="btn">
+              Log Out
+            </button>
+          </>
+        ) : (
+          <Link to={"/logIn"}>
+            <button className="btn font-bold text-lg bg-green-500 ">Login</button>
+          </Link>
+        )}
+
+
+
+
     </div>
+  </div>
   );
 };
 
