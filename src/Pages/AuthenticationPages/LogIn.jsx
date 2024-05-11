@@ -12,7 +12,7 @@ const LogIn = () => {
 
 
     const { signInUser, signInWithGoogle} =
-    useContext(AuthContext); // Import signInWithGoogle
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -84,8 +84,8 @@ const LogIn = () => {
       <motion.div
         initial={{ opacity: 0, x: "100%" }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 2 }}
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        transition={{ duration: 1.5 }}
+        className="absolute inset-0 z-0 bg-cover bg-center rounded-2xl m-2 lg:m-0 "
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />
       <div className="hero-content flex-col relative z-10">
@@ -103,29 +103,29 @@ const LogIn = () => {
 
             <div className="form-control ">
             <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-lg">Email</span>
                 </label>
                 <input
                   type="email"
                   required
                   name="email"
                   placeholder="Email"
-                  className="input input-bordered bg-slate-100"
+                  className="input input-bordered"
                 />
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text text-lg">Password</span>
                 </label>
                 <input
                   type="password"
                   placeholder="Password"
-                  className="input input-bordered bg-slate-100"
+                  className="input input-bordered"
                   required
                   name="password"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a href="#" className="label-text-alt link link-hover text-lg">
                     Forgot password?
                   </a>
                 </label>
@@ -133,7 +133,7 @@ const LogIn = () => {
 
 
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary text-lg">Login</button>
             </div>
           </form>
           <p className="text-center text-[18px] p-2 m-3">
@@ -143,7 +143,7 @@ const LogIn = () => {
             </Link>
           </p>
           <div className="">
-            <h1 className="text-center font-bold text-slate-500 text-[18px]">
+            <h1 className="text-center font-bold text-gray-200 text-[18px]">
               You can also Login with
             </h1>
             <div className="flex justify-evenly pb-6">
