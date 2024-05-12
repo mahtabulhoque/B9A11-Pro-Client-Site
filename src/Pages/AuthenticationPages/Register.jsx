@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
-  const { createUser,setUser } = useContext(AuthContext);
+  const { createUser,setUser,updateUser } = useContext(AuthContext);
 
   const {
     register,
@@ -29,6 +29,10 @@ const Register = () => {
       const result = await createUser(data.email, data.password);
       const user = result.user;
       console.log(user);
+
+      updateUser({ name: data.name, photoUrl: data.photoUrl }); 
+
+
 
       setUser({ name: data.name, photoUrl: data.photoUrl });
 

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 import backgroundImage from "../../../public/bg3.jpg";
+import googleLogo from "../../../public/google.png"
 
 
 const LogIn = () => {
@@ -146,17 +147,15 @@ const LogIn = () => {
             <h1 className="text-center font-bold text-gray-200 text-[18px]">
               You can also Login with
             </h1>
-            <div className="flex justify-evenly pb-6">
-              <div>
-                <p>
+            <div className="flex justify-center items-center pb-6">
+             
+                  <img className="w-8 h-10" src={googleLogo} alt="" />
                   <button
                     onClick={handleGoogleSignIn}
-                    className="btn font-bold text-[20px] text-green-500 "
+                    className="btn font-bold text-[20px] bg-gray-200  text-amber-700 "
                   >
                     Google
                   </button>
-                </p>
-              </div>
             </div>
           </div>
         </motion.div>
