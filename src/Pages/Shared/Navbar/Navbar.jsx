@@ -38,19 +38,19 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/ee">All Jobs</NavLink>
+            <NavLink to="/allJobs">All Jobs</NavLink>
           </li>
           <li>
-            <NavLink to="/ee">Add A Job</NavLink>
+            <NavLink to="/addJobs">Add A Job</NavLink>
           </li>
           <li>
-            <NavLink to="/t">My Jobs</NavLink>
+            <NavLink to="/myJobs">My Jobs</NavLink>
           </li>
           <li>
             <NavLink to="/register">Register</NavLink>
           </li>
           <li>
-            <NavLink to="/t">Blogs</NavLink>
+            <NavLink to="/blogs">Blogs</NavLink>
           </li>
         </div>
       );
