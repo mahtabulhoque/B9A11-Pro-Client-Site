@@ -45,7 +45,7 @@ const JobDetails = () => {
         <figure className="px-10 pt-10">
           <img src={pictureUrl} alt="Job" className="rounded-xl" />
         </figure>
-        <div className="card-body items-center text-center">
+        <div className="card-body items-center text-center text-lg font-semibold text-black">
           <h2>Job Title: {title}</h2>
           <h2>Description: {description}</h2>
           <h2>Salary Range: {salaryRange}</h2>
