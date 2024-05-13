@@ -1,79 +1,116 @@
-import { useContext, useState } from 'react';
-import Swal from 'sweetalert2';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { AuthContext } from '../../Provider/AuthProvider';
+import  { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
+import DatePicker from "react-datepicker"; // Import DatePicker component
+import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
 
 const AddJobs = () => {
+  const { user } = useContext(AuthContext);
+  const [postingDate, setPostingDate] = useState(null); // State for posting date
+  const [applicationDeadline, setApplicationDeadline] = useState(null); 
 
-    const {user} = useContext(AuthContext)
-
-  const [jobData, setJobData] = useState({
-    pictureUrl: '',
-    title: '',
-    userName:user?.displayName,
-    userEmail:user?.email,
-    category: '',
-    salaryRange: '',
-    description: '',
-    postingDate: new Date(),
-    applicationDeadline: new Date(),
-    applicantsNumber: 0,
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setJobData({ ...jobData, [name]: value });
-  };
-
-  const handleDateChange = (date, name) => {
-    setJobData({ ...jobData, [name]: date });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { pictureUrl, title, category, salaryRange, description } = jobData;
-    if (pictureUrl && title && category && salaryRange && description) {
+
+    // Retrieve form values directly from the form elements
+    const pictureUrl = e.target.elements.pictureUrl.value;
+    const title = e.target.elements.title.value;
+    const userName = user?.displayName;
+    const userEmail = user?.email;
+    const category = e.target.elements.category.value;
+    const salaryRange = e.target.elements.salaryRange.value;
+    const description = e.target.elements.description.value;
+   
+
+    // Check if all required fields are filled
+    if (
+      pictureUrl &&
+      title &&
+      category &&
+      salaryRange &&
+      description &&
+      postingDate &&
+      applicationDeadline
+    ) {
+      try {
+        // Prepare data for the POST request
+        const jobData = {
+          pictureUrl,
+          title,
+          userName,
+          userEmail,
+          category,
+          salaryRange,
+          description,
+          postingDate:postingDate.toLocaleDateString(),
+          applicationDeadline : applicationDeadline.toLocaleDateString(),
+        };
+
+        // Make a POST request to the server
+        await axios.post("http://localhost:5000/addJobs", jobData);
+
+        // Show success message to the user
         Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Job added successfully!',
+          icon: "success",
+          title: "Success!",
+          text: "Job added successfully!",
         });
-        console.log(jobData);
+
+        // Reset form fields after successful submission (if needed)
+        e.target.reset();
+      } catch (err) {
+        // Handle errors
+        console.error("Error:", err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong. Please try again later.",
+        });
+      }
     } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Please fill in all required fields!',
-        });
+      // Show error message if any required field is missing
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill in all required fields!",
+      });
     }
-};
+  };
+
   return (
     <div className="max-w-lg mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-semibold text-center mb-6">Add A Job</h1>
       <form onSubmit={handleSubmit}>
+        {/* Form inputs */}
+        {/* Picture URL */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Picture URL of the Job Banner:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Picture URL of the Job Banner:
+          </label>
           <input
             type="text"
             name="pictureUrl"
-            value={jobData.pictureUrl}
-            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+        {/* Job Title */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Job Title:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Job Title:
+          </label>
           <input
             type="text"
             name="title"
-            value={jobData.title}
-            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+        {/* Logged In User Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Logged In User Name:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Logged In User Name:
+          </label>
           <input
             type="text"
             name="userName"
@@ -82,8 +119,11 @@ const AddJobs = () => {
             className="w-full px-3 py-2 border rounded-md bg-gray-100"
           />
         </div>
+        {/* User Email */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">User Email:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            User Email:
+          </label>
           <input
             type="email"
             name="userEmail"
@@ -92,12 +132,13 @@ const AddJobs = () => {
             className="w-full px-3 py-2 border rounded-md bg-gray-100"
           />
         </div>
+        {/* Job Category */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Job Category:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Job Category:
+          </label>
           <select
             name="category"
-            value={jobData.category}
-            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           >
             <option value="">Select Category</option>
@@ -107,42 +148,52 @@ const AddJobs = () => {
             <option value="Hybrid">Hybrid</option>
           </select>
         </div>
+        {/* Salary range */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Salary range:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Salary range:
+          </label>
           <input
             type="text"
             name="salaryRange"
-            value={jobData.salaryRange}
-            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+        {/* Job Description */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Job Description:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Job Description:
+          </label>
           <textarea
             name="description"
-            value={jobData.description}
-            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             rows="4"
           ></textarea>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Job Posting Date:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Job Posting Date:
+          </label>
           <DatePicker
-            selected={jobData.postingDate}
-            onChange={(date) => handleDateChange(date, 'postingDate')}
+            selected={postingDate} 
+            onChange={(date) => setPostingDate(date)} 
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+
+        {/* Application Deadline */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Application Deadline:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Application Deadline:
+          </label>
           <DatePicker
-            selected={jobData.applicationDeadline}
-            onChange={(date) => handleDateChange(date, 'applicationDeadline')}
+            selected={applicationDeadline} 
+            onChange={(date) => setApplicationDeadline(date)}
+            changes
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white font-semibold px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:bg-blue-600"

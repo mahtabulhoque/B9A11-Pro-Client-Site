@@ -8,11 +8,14 @@ import AllJobs from "../Components/AllJobs/AllJobs";
 import AddJobs from "../Components/AddJobs/AddJobs";
 import MyJobs from "../Components/MyJobs/MyJobs";
 import Blogs from "../Components/Blogs/Blogs";
+import JobDetails from "../Pages/JobDetails/JobDetails";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element:<Main></Main>,
+      errorElement:<ErrorPage></ErrorPage>,
       children: [
         {
             path:'/',
@@ -47,6 +50,11 @@ const router = createBrowserRouter([
             path:'/register',
             element:<Register></Register>
 
+        },
+        {
+            path:'/job/:id',
+            element:<JobDetails></JobDetails>,
+            loader: ({params}) => fetch(`http://localhost:5000/job/${params.id}`)
         },
         
       ]
