@@ -1,19 +1,30 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import JobCards from "../JobCards/JobCards";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const JobCategoryTabs = () => {
 
-  const [jobs, setJobs] = useState([])
-  useEffect(() => {
-    const getData = async () =>{
-      const {data} = await axios('http://localhost:5000/jobs')
-      setJobs(data)
-    }
-    getData()
-  }, [])
+  const [data, setData] = useState([]);
+
+  const { isLoading, isError } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: async () => {
+      const response = await axios.get('http://localhost:5000/jobs');
+      console.log(data);
+      setData(response.data)
+      // return response.data;
+    },
+    // onSuccess: (data) => {
+    //   setJobs(data);
+    // }
+  });
+
+if(isLoading){
+  return <p>Loading.....</p>
+}
 
 
   return (
@@ -33,7 +44,7 @@ const JobCategoryTabs = () => {
         
         <TabPanel>
          <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-         {jobs
+         {data
             .filter(job => job.category=== "On Site")
             .map(job => (
               <JobCards key={job._id} job={job} />
@@ -43,7 +54,7 @@ const JobCategoryTabs = () => {
         
         <TabPanel>
            <div  className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-           {jobs
+           {data
             .filter(job => job.category === "Remote")
             .map(job => (
               <JobCards key={job._id} job={job} />
@@ -53,7 +64,7 @@ const JobCategoryTabs = () => {
          
         <TabPanel>
          <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-         {jobs
+         {data
             .filter(job => job.category === "Hybrid")
             .map(job => (
               <JobCards key={job._id} job={job} />
@@ -63,7 +74,7 @@ const JobCategoryTabs = () => {
         
         <TabPanel>
           <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-          {jobs
+          {data
             .filter(job => job.category === "Part-Time")
             .map(job => (
               <JobCards key={job._id} job={job} />

@@ -1,6 +1,7 @@
 
 import Banner from "../../../Components/Banner/Banner";
 import JobCategoryTabs from "../../../Components/JobCategoryTabs/JobCategoryTabs";
+import OurFuturePlan from "../../../Components/OurFuturePlan/OurFuturePlan";
 
 
 const Home = () => {
@@ -12,6 +13,9 @@ const Home = () => {
             <Banner></Banner>
             <div className="py-10">
             <JobCategoryTabs></JobCategoryTabs>
+            </div>
+            <div>
+                <OurFuturePlan></OurFuturePlan>
             </div>
         </div>
     );

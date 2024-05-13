@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Web Design",
+      "short_description": "Create stunning and responsive websites tailored to your needs."
+    },
+    {
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Mobile App Development",
+      "short_description": "Craft intuitive mobile applications for iOS and Android platforms."
+    },
+    {
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Graphic Design",
+      "short_description": "Design visually appealing logos, brochures, and branding materials."
+    },
+    {
+      "id": 4,
+      "image": "https://images.unsplash.com/photo-1562577308-9e66f0c65ce5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Digital Marketing",
+      "short_description": "Boost your online presence through SEO, SEM, and social media strategies."
+    },
+    {
+      "id": 5,
+      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Content Writing",
+      "short_description": "Produce engaging and SEO-friendly content for websites, blogs, and social media."
+    },
+    {
+      "id": 6,
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "service_name": "Consulting Services",
+      "short_description": "Get expert advice and guidance on business strategies and IT solutions."
+    }
+  ]
+  
