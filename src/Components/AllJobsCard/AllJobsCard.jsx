@@ -13,6 +13,8 @@ const AllJobsCard = ({dat}) => {
         applicationDeadline,
         applicants
       } = dat || {};
+
+      console.log(dat);
     
       return (
         <motion.div

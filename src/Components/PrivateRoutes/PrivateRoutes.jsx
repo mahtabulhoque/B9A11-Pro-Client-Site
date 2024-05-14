@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { AuthContext } from "../AuthProvider/AuthProvider";
+
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);

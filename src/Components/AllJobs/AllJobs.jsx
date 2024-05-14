@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 
 import banner2 from '../../../public/alljob2.jpg'
 
 import AllJobsCard from "../AllJobsCard/AllJobsCard";
-import { useState } from "react";
+
 
 const AllJobs = () => {
   const [data, setData] = useState([]);
@@ -43,7 +44,7 @@ const AllJobs = () => {
 
         <div className="grid md:grid-cols-3 gap-4 p-4">
           {data.map((dat) => (
-            <AllJobsCard key={dat.id} datas={dat}></AllJobsCard>
+            <AllJobsCard key={dat._id} dat={dat}></AllJobsCard>
           ))}
         </div>
       </div>

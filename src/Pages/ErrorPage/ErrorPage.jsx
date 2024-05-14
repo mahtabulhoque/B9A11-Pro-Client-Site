@@ -6,7 +6,7 @@ const ErrorPage = () => {
     <div className="flex justify-center items-center py-24">
       <div className="error-container text-center">
         <h1 className="error-heading text-4xl">
-          404 Oops! Something went wrong.
+          404 Oops! Page Not Found.
         </h1>
         <p className="error-message text-2xl">
           We apologize for the inconvenience. Please try again later.

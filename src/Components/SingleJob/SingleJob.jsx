@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const SingleJob = ({ job, onDelete }) => {
   const {
     _id,
     photoUrl,
-    title,
     category,
     userName,
     salaryRange,
@@ -38,12 +38,17 @@ const SingleJob = ({ job, onDelete }) => {
         <span className="text-amber-700 text-md">Applicants: {applicants}</span>
       </div>
       <div className="flex gap-6">
-        <motion.button
+     <Link to={`/update/${_id}`}>
+     <motion.button
           className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
           whileHover={{ scale: 1.1 }}
         >
+     
+  
           Update
         </motion.button>
+        </Link>
+
         <motion.button
           onClick={onDelete}
           className="bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-600 transition duration-300"
