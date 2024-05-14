@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -52,6 +53,18 @@ const Register = () => {
 
 
       setUser({ name: data.name, photoUrl: data.photoUrl });
+
+      console.log(result.user);
+
+      // jwt implement
+       
+      const { data } = await axios.post('http://localhost:5000/jwt', 
+      { email: result?.user?.email }, 
+      { withCredentials: true }
+    );
+    console.log(data);
+
+
 
       navigate(from, {replace:true});
 

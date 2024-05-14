@@ -5,30 +5,23 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 import backgroundImage from "../../../public/bg3.jpg";
-import googleLogo from "../../../public/google.png"
-
+import googleLogo from "../../../public/google.png";
+import axios from "axios";
 
 const LogIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from || '/';
 
-  const from = location.state || '/'
+  const { signInUser, signInWithGoogle, user, loading } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
-
-
-    const { signInUser, signInWithGoogle,user, loading} =
-    useContext(AuthContext);
-
-    useEffect(()=>{
-      if(user){
-        navigate('/')
-      }
-    },[navigate,user])
-  
-
-    // Email & password Login
-
+  // Email & password Login
   const handleLogin = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -37,10 +30,20 @@ const LogIn = () => {
 
     try {
       const result = await signInUser(email, password);
-      console.log(result);
+
+      // jwt implement
+      console.log(result.user);
+
+      // Make sure the backend server is running and accessible at this URL
+      const { data } = await axios.post('http://localhost:5000/jwt', 
+      { email: result?.user?.email }, 
+      { withCredentials: true }
+    );
+    console.log(data);
+
       e.target.reset();
 
-      navigate(from, {replace:true});
+      navigate(from, { replace: true });
 
       Swal.fire({
         title: "Success!",
@@ -56,40 +59,44 @@ const LogIn = () => {
         confirmButtonText: "OK",
       });
       console.error(error);
+
+      // Ensure the user stays on the login page
+      navigate('/login', { replace: true });
     }
   };
 
-    // Google Login
+  // Google Login
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log(result.user);
 
-  const handleGoogleSignIn = () => {
-    signInWithGoogle()
-      .then((result) => {
-        console.log(result.user);
-        Swal.fire({
-          title: "Success!",
-          text: "You have successfully signed in with Google.",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-        navigate(from, {replace:true});
-      })
-      .catch((error) => {
-        console.error(error);
-        Swal.fire({
-          title: "Error!",
-          text: "Failed to sign in with Google.",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      });
-  };
+      // jwt implement
+      const { data } = await axios.post('http://localhost:5000/jwt', 
+      { email: result?.user?.email }, 
+      { withCredentials: true }
+    );
+    console.log(data);
 
- if(user || loading) return
-  
- 
+    Swal.fire({
+      title: "Success!",
+      text: "You have successfully signed in with Google.",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+    navigate(from, { replace: true });
+  } catch (error) {
+    console.error(error);
+    Swal.fire({
+      title: "Error!",
+      text: "Failed to sign in with Google.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+  }
+};
 
-
-
+  if (user || loading) return null;
 
   return (
     <div className="hero min-h-screen my-16 relative overflow-hidden">
@@ -112,37 +119,35 @@ const LogIn = () => {
           className="card shrink-0 max-w-md shadow-2xl bg-opacity-50 rounded px-10 pt-6 pb-10 mb-4 bg-slate-300"
         >
           <form onSubmit={handleLogin} className="card-body">
-
-            <div className="form-control ">
-            <label className="label">
-                  <span className="label-text text-lg">Email</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  name="email"
-                  placeholder="Email"
-                  className="input input-bordered"
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-lg">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="input input-bordered"
-                  required
-                  name="password"
-                />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover text-lg">
-                    Forgot password?
-                  </a>
-                </label>
-              </div>
-
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-lg">Email</span>
+              </label>
+              <input
+                type="email"
+                required
+                name="email"
+                placeholder="Email"
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-lg">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="input input-bordered"
+                required
+                name="password"
+              />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover text-lg">
+                  Forgot password?
+                </a>
+              </label>
+            </div>
 
             <div className="form-control mt-6">
               <button className="btn btn-primary text-lg">Login</button>
@@ -159,14 +164,13 @@ const LogIn = () => {
               You can also Login with
             </h1>
             <div className="flex justify-center items-center pb-6">
-             
-                  <img className="w-8 h-10" src={googleLogo} alt="" />
-                  <button
-                    onClick={handleGoogleSignIn}
-                    className="btn font-bold text-[20px] bg-gray-200  text-amber-700 "
-                  >
-                    Google
-                  </button>
+              <img className="w-8 h-10" src={googleLogo} alt="" />
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn font-bold text-[20px] bg-gray-200 text-amber-700"
+              >
+                Google
+              </button>
             </div>
           </div>
         </motion.div>

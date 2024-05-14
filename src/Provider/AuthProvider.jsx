@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signOut,GoogleAuthProvider, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import axios from "axios";
 
 
 
@@ -41,10 +42,16 @@ const AuthProvider = ({children}) => {
     }
 
   
-    const logOut = ()=>{
+    const logOut = async () => {
         setLoading(true);
+        const { data } =  await axios('http://localhost:5000/logout',{
+            withCredentials : true
+        })
+        console.log(data);
         return signOut(auth);
     }
+
+
 
 
     const signInWithGoogle = () =>{

@@ -50,7 +50,7 @@ const AddJobs = () => {
         };
 
         //  POST request to the server
-        await axios.post("http://localhost:5000/addJobs", jobData);
+        await axios.post("http://localhost:5000/addJobs", jobData,{withCredentials:true});
 
         // success message to the user
         Swal.fire({

@@ -13,7 +13,7 @@ const MyJobs = () => {
     queryKey: ["jobs", user?.email],
     queryFn: async () => {
       if (!user?.email) throw new Error("User email is not available");
-      const response = await axios.get(`http://localhost:5000/jobs/${user.email}`);
+      const response = await axios.get(`http://localhost:5000/jobs/${user.email}`,{ withCredentials : true });
       return response.data;
     },
     enabled: !!user?.email,
@@ -22,7 +22,7 @@ const MyJobs = () => {
   // delete a job function
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`http://localhost:5000/jobs/${id}`);
+      await axios.delete(`http://localhost:5000/jobs/${id}`,{ withCredentials : true });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["jobs", user?.email]);

@@ -107,7 +107,7 @@ const UpdateJob = () => {
   if (isError) return <div>Error loading job data</div>;
 
   return (
-    <div className="max-w-lg mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-lg mx-auto my-8 p-6 shadow-lg rounded-lg">
       <h1 className="text-3xl font-semibold text-center mb-6">Update Job</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -119,12 +119,12 @@ const UpdateJob = () => {
           <input type="text" name="title" defaultValue={job.title} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Logged In User Name:</label>
-          <input type="text" name="userName" defaultValue={user?.displayName} readOnly className="w-full px-3 py-2 border rounded-md bg-gray-100" />
+          <label className="block text-sm font-bold mb-2">Logged In User Name:</label>
+          <input type="text" name="userName" defaultValue={user?.displayName} readOnly className="w-full px-3 py-2 border rounded-md " />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">User Email:</label>
-          <input type="email" name="userEmail" defaultValue={user?.email} readOnly className="w-full px-3 py-2 border rounded-md bg-gray-100" />
+          <label className="block  text-sm font-bold mb-2">User Email:</label>
+          <input type="email" name="userEmail" defaultValue={user?.email} readOnly className="w-full px-3 py-2 border rounded-md " />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Job Category:</label>
@@ -152,8 +152,8 @@ const UpdateJob = () => {
           <label className="block text-gray-700 text-sm font-bold mb-2">Application Deadline:</label>
           <DatePicker selected={applicationDeadline} onChange={(date) => setApplicationDeadline(date)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white font-semibold px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-          Submit
+        <button type="submit" className="w-full bg-green-500 text-white font-semibold px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+          Update
         </button>
       </form>
     </div>
