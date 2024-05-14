@@ -1,36 +1,34 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import JobCards from "../JobCards/JobCards";
-import {  useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const JobCategoryTabs = () => {
-
-  const [data, setData] = useState([]);
-
-  const { isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['jobs'],
     queryFn: async () => {
       const response = await axios.get('http://localhost:5000/jobs');
-      console.log(data);
-      setData(response.data)
-      // return response.data;
+      return response.data;
     },
-    // onSuccess: (data) => {
-    //   setJobs(data);
-    // }
   });
 
-if(isLoading){
-  return <p>Loading.....</p>
-}
+  if (isLoading) {
+    return <p>Loading.....</p>;
+  }
 
+  if (isError) {
+    return <p>Error fetching data</p>;
+  }
+
+  const filterJobsByCategory = (category) => {
+    return data.filter(job => job.category === category).slice(0, 3);
+  };
 
   return (
     <Tabs>
       <div className="container px-6 py-10 mx-auto">
-        <h1 className="capitalize text-2xl lg:text-4xl text-center py-7 ">job by category</h1>
+        <h1 className="capitalize text-2xl lg:text-4xl text-center py-7 ">Job by Category</h1>
         <div className="flex items-center justify-center">
           <div className="text-xs lg:text-lg font-semibold">
             <TabList>
@@ -43,40 +41,32 @@ if(isLoading){
         </div>
         
         <TabPanel>
-         <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-         {data
-            .filter(job => job.category=== "On Site")
-            .map(job => (
+          <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
+            {filterJobsByCategory("On Site").map(job => (
               <JobCards key={job._id} job={job} />
             ))}
-         </div>
-        </TabPanel>
-        
-        <TabPanel>
-           <div  className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-           {data
-            .filter(job => job.category === "Remote")
-            .map(job => (
-              <JobCards key={job._id} job={job} />
-            ))}
-           </div>
-        </TabPanel>
-         
-        <TabPanel>
-         <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-         {data
-            .filter(job => job.category === "Hybrid")
-            .map(job => (
-              <JobCards key={job._id} job={job} />
-            ))}
-         </div>
+          </div>
         </TabPanel>
         
         <TabPanel>
           <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
-          {data
-            .filter(job => job.category === "Part-Time")
-            .map(job => (
+            {filterJobsByCategory("Remote").map(job => (
+              <JobCards key={job._id} job={job} />
+            ))}
+          </div>
+        </TabPanel>
+         
+        <TabPanel>
+          <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
+            {filterJobsByCategory("Hybrid").map(job => (
+              <JobCards key={job._id} job={job} />
+            ))}
+          </div>
+        </TabPanel>
+        
+        <TabPanel>
+          <div className="grid grid-cols-1 gap-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3">
+            {filterJobsByCategory("Part-Time").map(job => (
               <JobCards key={job._id} job={job} />
             ))}
           </div>

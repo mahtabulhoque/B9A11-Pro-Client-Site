@@ -9,6 +9,7 @@ const JobCards = ({ job }) => {
     salaryRange,
     postingDate,
     applicationDeadline,
+    applicants
   } = job || {};
 
   return (
@@ -32,7 +33,7 @@ const JobCards = ({ job }) => {
         </div>
         <div className="flex justify-between items-center gap-4 mb-5">
           <span className="text-blue-800 text-md">Salary Range: {salaryRange}</span>
-          <span className="text-amber-700 text-md">Applicants: {} </span>
+          <span className="text-amber-700 text-md">Applicants: {applicants} </span>
         </div>
       </div>
 

@@ -5,7 +5,7 @@ const SingleService = ({ service }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 3 }}
       className="card w-full bg-[#FFFCE6] shadow-2xl"

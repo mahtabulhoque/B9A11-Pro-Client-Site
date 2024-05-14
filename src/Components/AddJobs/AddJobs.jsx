@@ -46,12 +46,13 @@ const AddJobs = () => {
           description,
           postingDate:postingDate.toLocaleDateString(),
           applicationDeadline : applicationDeadline.toLocaleDateString(),
+          applicants:0,
         };
 
-        // Make a POST request to the server
+        //  POST request to the server
         await axios.post("http://localhost:5000/addJobs", jobData);
 
-        // Show success message to the user
+        // success message to the user
         Swal.fire({
           icon: "success",
           title: "Success!",

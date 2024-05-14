@@ -1,23 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SingleJob from "../SingleJob/SingleJob";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const MyJobs = () => {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
 
   // Fetch data using useQuery
   const { isLoading, isError } = useQuery({
-    queryKey: ["jobs"],
+    queryKey: ["jobs", user?.email], // Include user email in queryKey to refetch if it changes
     queryFn: async () => {
       try {
-        const response = await axios.get("http://localhost:5000/jobs");
-        setData(response.data); // Set the fetched data to the state
-        return response.data; // Return the fetched data
+        if (!user?.email) throw new Error("User email is not available");
+        const response = await axios.get(`http://localhost:5000/jobs?userEmail=${user.email}`);
+        setData(response.data); 
+        return response.data;
       } catch (error) {
         throw new Error("Error fetching data");
       }
     },
+    enabled: !!user?.email, // Only run the query if user email is available
   });
 
   if (isLoading) {
@@ -36,13 +40,11 @@ const MyJobs = () => {
 
       <div className="grid md:grid-cols-2 gap-4">
         {
-            data.length <= 0? (
-                <h1 className="text-center text-2xl m-10">No data added</h1>
-            ) : (
-
-                data.map(datas => <SingleJob key={datas.id} datas={datas}></SingleJob>)
-
-            )
+          data.length <= 0 ? (
+            <h1 className="text-center text-2xl m-10">No data added</h1>
+          ) : (
+            data.map(datas => <SingleJob key={datas._id} datas={datas}></SingleJob>)
+          )
         }
       </div>
     </div>
