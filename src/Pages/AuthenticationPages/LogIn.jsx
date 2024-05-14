@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
@@ -9,14 +9,23 @@ import googleLogo from "../../../public/google.png"
 
 
 const LogIn = () => {
-
-
-
-    const { signInUser, signInWithGoogle} =
-    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const from = location.state || '/'
+
+
+
+
+    const { signInUser, signInWithGoogle,user, loading} =
+    useContext(AuthContext);
+
+    useEffect(()=>{
+      if(user){
+        navigate('/')
+      }
+    },[navigate,user])
+  
 
     // Email & password Login
 
@@ -31,7 +40,7 @@ const LogIn = () => {
       console.log(result);
       e.target.reset();
 
-      navigate(location?.state?.from ? location.state.from : "/");
+      navigate(from, {replace:true});
 
       Swal.fire({
         title: "Success!",
@@ -62,7 +71,7 @@ const LogIn = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        navigate(location?.state?.from ? location.state.from : "/");
+        navigate(from, {replace:true});
       })
       .catch((error) => {
         console.error(error);
@@ -75,7 +84,9 @@ const LogIn = () => {
       });
   };
 
-
+ if(user || loading) return
+  
+ 
 
 
 

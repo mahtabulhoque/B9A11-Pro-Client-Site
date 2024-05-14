@@ -2,6 +2,7 @@
 import Banner from "../../../Components/Banner/Banner";
 import JobCategoryTabs from "../../../Components/JobCategoryTabs/JobCategoryTabs";
 import OurFuturePlan from "../../../Components/OurFuturePlan/OurFuturePlan";
+import Review from "../../../Components/Review/Review";
 
 
 const Home = () => {
@@ -16,6 +17,9 @@ const Home = () => {
             </div>
             <div>
                 <OurFuturePlan></OurFuturePlan>
+            </div>
+            <div className="my-16">
+                <Review></Review>
             </div>
         </div>
     );

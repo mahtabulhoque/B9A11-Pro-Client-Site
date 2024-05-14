@@ -12,7 +12,7 @@ import bg1 from "../../../public/banner1.jpg";
 import bg2 from "../../../public/banner2.jpg";
 import bg3 from "../../../public/banner3.jpg";
 import bg4 from "../../../public/banner4.jpg";
-import bg5 from "../../../public/banner5.jpg";
+import bg5 from "../../../public/alljob.jpg";
 
 const Banner = () => {
   return (
@@ -112,7 +112,7 @@ const Banner = () => {
           }}
         >
           <motion.h1
-            className="text-2xl lg:text-5xl text-gray-100 font-semibold py-16 mx-6"
+            className="text-2xl lg:text-5xl text-slate-300 font-semibold py-16 mx-6"
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -121,7 +121,7 @@ const Banner = () => {
           </motion.h1>
 
           <motion.p
-            className="text-yellow-400 text-xl lg:text-3xl font-medium mx-6 text-center"
+            className="text-white text-xl lg:text-3xl font-medium mx-6 text-center"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}

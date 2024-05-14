@@ -1,12 +1,29 @@
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
-  const { createUser,setUser,updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || '/'
+
+  const { createUser,setUser,updateUser,user,loading } = useContext(AuthContext);
+
+  
+  useEffect(()=>{
+    if(user){
+      navigate('/')
+    }
+  },[navigate,user])
+
+
+
+
+  
+ 
 
   const {
     register,
@@ -36,6 +53,8 @@ const Register = () => {
 
       setUser({ name: data.name, photoUrl: data.photoUrl });
 
+      navigate(from, {replace:true});
+
 
         Swal.fire({
         icon: "success",
@@ -52,6 +71,8 @@ const Register = () => {
       });
     }
   };
+
+  if(user || loading) return
 
   return (
     <div className="m-2 lg:m-0">

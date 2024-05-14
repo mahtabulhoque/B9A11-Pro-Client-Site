@@ -69,7 +69,7 @@ const AllJobsCard = ({dat}) => {
     
           <Link to={`/job/${_id}`}>
         <motion.button 
-          className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+          className="bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
           whileHover={{ scale: 1.1 }} // Animation properties on hover
         >
           View Details
