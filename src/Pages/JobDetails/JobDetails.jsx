@@ -61,12 +61,12 @@ const JobDetails = () => {
         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-8 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Apply for Job</h2>
-            <p>Modal content goes here...</p>
+            <p>I can not implement this part.</p>
             <button
               className="btn btn-primary mt-4"
               onClick={toggleModal}
             >
-              Close
+              Apply
             </button>
           </div>
         </div>
