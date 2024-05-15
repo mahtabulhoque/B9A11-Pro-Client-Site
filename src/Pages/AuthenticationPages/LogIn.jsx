@@ -32,10 +32,10 @@ const LogIn = () => {
       const result = await signInUser(email, password);
 
       // jwt implement
-      console.log(result.user);
+      // console.log(result.user);
 
       // Make sure the backend server is running and accessible at this URL
-      const { data } = await axios.post('http://localhost:5000/jwt', 
+      const { data } = await axios.post('https://b9-a11-assignment-server-site.vercel.app/jwt', 
       { email: result?.user?.email }, 
       { withCredentials: true }
     );
@@ -69,10 +69,10 @@ const LogIn = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
-      console.log(result.user);
+      // console.log(result.user);
 
       // jwt implement
-      const { data } = await axios.post('http://localhost:5000/jwt', 
+      const { data } = await axios.post('https://b9-a11-assignment-server-site.vercel.app/jwt', 
       { email: result?.user?.email }, 
       { withCredentials: true }
     );

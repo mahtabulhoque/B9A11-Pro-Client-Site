@@ -1,9 +1,8 @@
-
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const Blogs = () => {
   return (
-    <motion.div 
+    <motion.div
       className="p-4"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -11,13 +10,13 @@ const Blogs = () => {
     >
       <h1 className="text-4xl text-center font-bold py-10"> BLOGS </h1>
 
-      <motion.div 
+      <motion.div
         className=""
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <div className='bg-gray-200 p-8 rounded-xl text-black '>
+        <div className="bg-gray-200 p-8 rounded-xl text-black ">
           <h2 className="text-2xl font-semibold">
             Question 01 : What is an access token and refresh token? How do they
             work and where should we store them on the client side?
@@ -81,7 +80,7 @@ const Blogs = () => {
         </div>
 
         <div className="text-xl my-10 p-8 font-medium bg-gray-200 rounded-xl text-black ">
-          <motion.h1 
+          <motion.h1
             className="text-2xl font-semibold py-10"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,7 +88,7 @@ const Blogs = () => {
           >
             Question 02: What is express js? What is Nest JS?
           </motion.h1>
-          <motion.h1 
+          <motion.h1
             className="text-3xl py-3"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,7 +98,7 @@ const Blogs = () => {
           </motion.h1>
 
           <div>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -113,7 +112,7 @@ const Blogs = () => {
               built-in middleware and HTTP utility methods.
             </motion.p>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -138,7 +137,7 @@ const Blogs = () => {
             </motion.p>
 
             <div className="py-10">
-              <motion.h1 
+              <motion.h1
                 className="text-3xl py-3"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -146,7 +145,7 @@ const Blogs = () => {
               >
                 Nest Js
               </motion.h1>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -196,6 +195,136 @@ const Blogs = () => {
                 structured and opinionated framework for building Node.js
                 applications, with a focus on developer productivity,
                 maintainability, and scalability.
+              </motion.p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-xl my-10 p-8 font-medium bg-gray-200 rounded-xl text-black ">
+          <motion.h1
+            className="text-2xl font-semibold py-10"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            Question 03: Short Summary Of my code...
+          </motion.h1>
+          <motion.h1
+            className="text-3xl py-3"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            Frontend
+          </motion.h1>
+
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              This code sets up routing for a React application using React
+              Router. It defines different routes for various pages/components
+              such as Home, Login, Register, AllJobs, AddJobs, MyJobs, Blogs,
+              JobDetails, UpdateJob, and ErrorPage. PrivateRoutes are used to
+              protect routes that require authentication. The
+              `createBrowserRouter` function from React Router is utilized to
+              create the router configuration. The `Main` component serves as
+              the layout wrapper for the application, containing a Navbar,
+              followed by the routed content (Outlet), and finally a Footer.
+              Each route specifies its path, corresponding component, and
+              optionally a loader function for data fetching.
+            </motion.p>
+
+            <div className="py-10">
+              <motion.h1
+                className="text-3xl py-3"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                Backend
+              </motion.h1>
+              <motion.p
+               className=""
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                This Node.js code sets up a server using Express framework for
+                handling various HTTP requests. It connects to a MongoDB
+                database to perform CRUD operations on a collection called jobs.
+                Here is a summary of the functionalities:
+                <div className="space-y-6">
+
+                <p>
+                  1.Middleware Setup: Middleware such as CORS, JSON parsing, and
+                  cookie parsing are configured.
+                </p>
+                <p>
+                  2. JWT Verification: Middleware function verifyJWT is defined
+                  to verify JSON Web Tokens (JWT) included in request for
+                  cookies. It ensures routes are accessible only to
+                  authenticated users.
+                </p>
+                <p>
+                  3.
+                  
+                   JWT Generation: POST endpoint /jwt generates a JWT upon
+                  successful login, storing it in a cookie.
+                  
+                  <br />
+
+                   Logout: GET endpoint
+                  /logout clears the JWT cookie upon logout. 
+                  
+                  Get All Jobs: GET
+                  endpoint /jobs retrieves all jobs from the database. 
+
+                  <br />
+                  
+                  Get Single Job by ID: GET endpoint /job/:id retrieves a single job
+                  based on its ID. 
+
+                  <br />
+                  
+                  Get Jobs by User Email: GET endpoint
+                  /jobs/:email retrieves jobs associated with a specific user is
+                  email address.
+                  <br />
+                  
+                   Delete Job: DELETE endpoint /jobs/:id deletes a
+                  job by its ID, with authorization check based on the job is
+                  owner. 
+                  <br />
+                  Add Job with JWT Authentication: POST endpoint /addJobs
+                  adds a new job to the database with JWT authentication.
+                  <br />
+                   
+                  Update Job: PUT endpoint /updateJob/:id updates an existing job by
+                  its ID. 
+                  <br />
+                  
+                  
+                  Increment Applicants Number: POST endpoint
+                  /applyJob/:id increments the number of applicants for a job by
+                  its ID.
+                </p>
+                <p>
+                  4. Database Connection: It establishes a connection to MongoDB Atlas using the MongoDB Node.js driver.
+                </p>
+                <p>
+                  5. **WebSockets**: NestJS provides WebSocket support out of
+                  the box, making it easy to build real-time applications using
+                  WebSockets.
+                </p>
+                <p>
+                  6. The server listens on a specified port, with a default fallback to port 5000.
+                </p>
+                </div>
+                <br />
+                This code provides a RESTful API for managing job listings with JWT authentication and MongoDB as the backend database.
               </motion.p>
             </div>
           </div>

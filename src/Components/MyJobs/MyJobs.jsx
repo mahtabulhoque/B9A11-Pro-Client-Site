@@ -13,7 +13,7 @@ const MyJobs = () => {
     queryKey: ["jobs", user?.email],
     queryFn: async () => {
       if (!user?.email) throw new Error("User email is not available");
-      const response = await axios.get(`http://localhost:5000/jobs/${user.email}`,{ withCredentials : true });
+      const response = await axios.get(`https://b9-a11-assignment-server-site.vercel.app/jobs/${user.email}`,{ withCredentials : true });
       return response.data;
     },
     enabled: !!user?.email,
@@ -22,7 +22,7 @@ const MyJobs = () => {
   // delete a job function
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`http://localhost:5000/jobs/${id}`,{ withCredentials : true });
+      await axios.delete(`https://b9-a11-assignment-server-site.vercel.app/jobs/${id}`,{ withCredentials : true });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["jobs", user?.email]);
@@ -50,7 +50,7 @@ const MyJobs = () => {
 
   return (
     <div>
-      <h2 className="text-[30px] lg:text-[40px] font-extrabold text-center text-rose-600 py-10">
+      <h2 className="text-[30px] lg:text-[40px] font-extrabold text-center text-green-600 py-10">
         My Jobs
       </h2>
       <div className="grid md:grid-cols-2 gap-4">

@@ -14,7 +14,7 @@ const AllJobsCard = ({dat}) => {
         applicants
       } = dat || {};
 
-      console.log(dat);
+      // console.log(dat);
     
       return (
         <motion.div

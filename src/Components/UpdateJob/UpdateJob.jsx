@@ -8,12 +8,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const fetchJobById = async (id) => {
-  const response = await axios.get(`http://localhost:5000/job/${id}`);
+  const response = await axios.get(`https://b9-a11-assignment-server-site.vercel.app/job/${id}`);
   return response.data;
 };
 
 const updateJob = async ({ id, jobData }) => {
-  const response = await axios.put(`http://localhost:5000/updateJob/${id}`, jobData);
+  const response = await axios.put(`https://b9-a11-assignment-server-site.vercel.app/updateJob/${id}`, jobData);
   return response.data;
 };
 

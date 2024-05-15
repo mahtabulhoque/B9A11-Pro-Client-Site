@@ -54,11 +54,11 @@ const Register = () => {
 
       setUser({ name: data.name, photoUrl: data.photoUrl });
 
-      console.log(result.user);
+      // console.log(result.user);
 
       // jwt implement
        
-      const { data } = await axios.post('http://localhost:5000/jwt', 
+      const { data } = await axios.post('https://b9-a11-assignment-server-site.vercel.app/jwt', 
       { email: result?.user?.email }, 
       { withCredentials: true }
     );

@@ -15,12 +15,12 @@ const SingleJob = ({ job, onDelete }) => {
 
   return (
     <motion.div
-      className="bg-zinc-300 rounded-lg shadow-lg p-4 mb-4"
+      className="bg-zinc-300 rounded-lg shadow-lg p-4 m-5 lg:m-0 mb-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
     >
-      <table className="min-w-full leading-normal">
+      <table className="table  leading-normal py-10">
         <thead>
           <tr>
             <th

@@ -8,7 +8,7 @@ const JobCategoryTabs = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['jobs'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:5000/jobs');
+      const response = await axios.get('https://b9-a11-assignment-server-site.vercel.app/jobs');
       return response.data;
     },
   });

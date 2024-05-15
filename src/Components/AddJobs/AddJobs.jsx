@@ -50,7 +50,7 @@ const AddJobs = () => {
         };
 
         //  POST request to the server
-        await axios.post("http://localhost:5000/addJobs", jobData,{withCredentials:true});
+        await axios.post("https://b9-a11-assignment-server-site.vercel.app/addJobs", jobData,{withCredentials:true});
 
         // success message to the user
         Swal.fire({
@@ -82,7 +82,7 @@ const AddJobs = () => {
 
   return (
     <div className="max-w-lg mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-3xl font-semibold text-center mb-6">Add A Job</h1>
+      <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Add A Job</h1>
       <form onSubmit={handleSubmit}>
         {/* Form inputs */}
         {/* Picture URL */}

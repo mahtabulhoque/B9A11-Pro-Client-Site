@@ -15,7 +15,7 @@ const AllJobs = () => {
     queryKey: ["jobs"],
     queryFn: async () => {
       try {
-        const response = await axios.get("http://localhost:5000/jobs");
+        const response = await axios.get("https://b9-a11-assignment-server-site.vercel.app/jobs");
         setData(response.data);
         return response.data;
       } catch (error) {

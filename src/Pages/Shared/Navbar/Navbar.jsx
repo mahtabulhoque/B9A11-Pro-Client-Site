@@ -86,7 +86,7 @@ const Navbar = () => {
         </div>
 
         <div className='flex items-center gap-3'>
-           <div className='w-16 lg:w-20'>
+           <div className='w-14 lg:w-20 '>
            <img src={logo} alt="" />
            </div>
             <a className="text-lg lg:text-4xl font-extrabold text-cyan-600">JobQuestHub</a>
@@ -100,14 +100,16 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end gap-4">
+      <div className="navbar-end gap-2">
+
+        {/* toggle */}
         
        <div>
        <input
           onChange={handleToggle}
           type="checkbox"
           value="synthwave"
-          className="toggle ml-7 mt-4 lg:mt-2  theme-controller"
+          className="toggle mt-4 lg:mt-2  theme-controller"
           checked={theme === 'night'}
         />
        </div>
@@ -136,7 +138,7 @@ const Navbar = () => {
           </>
         ) : (
           <Link to={"/logIn"}>
-            <button className="btn font-bold text-lg bg-green-500 ">Login</button>
+            <button className="btn font-bold text-lg bg-green-500">Login</button>
           </Link>
         )}
 

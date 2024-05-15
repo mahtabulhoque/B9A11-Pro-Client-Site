@@ -9,7 +9,7 @@ const Footer = () => {
       transition={{ duration: 3 }}
       className="m-2 lg:m-0"
     >
-      <footer className="footer footer-center p-10 text-lg font-medium bg-slate-300 rounded-2xl text-gray-600">
+      <footer className="footer footer-center p-10 text-lg font-medium bg-slate-300 rounded-2xl text-gray-600 my-8">
         <aside>
           <div className="w-20">
             <img src={logo} alt="" />
